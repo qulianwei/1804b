@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.user.mapper.UserMapper" >
+ 
+ 	<select id="queryUserList" resultType="com.jk.user.model.User">
+ 		select * from t_user1 where userName=#{name}
+ 	</select>
+ 	
+ 	<select id="queryRoleByUserId" resultType="com.jk.role.model.UserRole">
+ 		select t2.roleId from t_user1 t1,t_role_user t2 where t1.userId=t2.userId and t2.userId=#{userId}
+ 	</select>
+ 	
+ 	<select id="findTree" resultType="HashMap">
+ 	SELECT DISTINCT t5.power_id as id,t5.p_name text,t5.parent as pid,t5.p_uri as uri from t_user1 t1,t_role_user t2,t_role t3,role_power t4,t_power1 t5 where t1.userId=t2.userId and t2.roleId=t3.roleId and t3.roleId=t4.r_id and t4.p_id=t5.power_id and t1.userName=#{userName}
+ 	</select>
+	
+
+</mapper>
